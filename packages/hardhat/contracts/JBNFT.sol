@@ -1,25 +1,31 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.2;
+pragma solidity ^0.8.6;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@jbx-protocol/contracts-v2/contracts/JBETHERC20ProjectPayer.sol";
+import "@jbx-protocol/contracts-v2/contracts/libraries/JBTokens.sol";
 
 contract JBNFT is
     ERC721,
     ERC721Enumerable,
     ERC721URIStorage,
-    Ownable
+    Ownable,
+    JBETHERC20ProjectPayer
 {
     using Counters for Counters.Counter;
-
     Counters.Counter private _tokenIdCounter;
 
     uint256 public price = 0.01 ether;
 
-    constructor() ERC721("JBNFT", "JBNFT") {}
+    uint256 public juiceBoxProjectId;
+
+    constructor(uint256 _juiceBoxProjectId) ERC721("JBNFT", "JBNFT") {
+        juiceBoxProjectId = _juiceBoxProjectId;
+    }
 
     function _baseURI() internal pure override returns (string memory) {
         return "https://ipfs.io/ipfs/";
@@ -32,6 +38,10 @@ contract JBNFT is
         uint256 tokenId = _tokenIdCounter.current();
         _safeMint(msg.sender, tokenId);
         _setTokenURI(tokenId, "QmfVMAmNM1kDEBYrC2TPzQDoCRFH6F5tE1e9Mr4FkkR5Xr");
+
+        // ToDo. set preferClaimedTokens param to TRUE?
+        JBETHERC20ProjectPayer.pay{value: msg.value}(juiceBoxProjectId, JBTokens.ETH);
+
         return tokenId;
     }
 
