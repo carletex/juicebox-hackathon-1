@@ -17,10 +17,11 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   const { deployer } = await getNamedAccounts();
   const chainId = await getChainId();
 
-  // ToDo.
-  // We probably want to deploy a local one.
-  const juiceBoxProjectId = "1";
-  const juiceBoxPayerAddress = "0x3247df1bdC849f69Ba7dA4faf71d1e5850A6Fbb8";
+  // We probably want to deploy a local one?
+  // Damu-Carlos project on rinkeby
+  const juiceBoxProjectId = "4283";
+  // Damu-Carlos payer Deployed on rinkeby
+  const juiceBoxPayerAddress = "0x7c89c6a1686109D7514aD009BAD27140EC94fc80";
 
   await deploy("JBNFT", {
     // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
@@ -31,7 +32,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   });
 
   // Getting a previously deployed contract
-  const YourContract = await ethers.getContract("JBNFT", deployer);
+  // const YourContract = await ethers.getContract("JBNFT", deployer);
   /*  await YourContract.setPurpose("Hello");
 
     // To take ownership of yourContract using the ownable library uncomment next line and add the
