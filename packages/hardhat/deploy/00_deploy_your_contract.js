@@ -17,10 +17,15 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   const { deployer } = await getNamedAccounts();
   const chainId = await getChainId();
 
+  // ToDo.
+  // We probably want to deploy a local one.
+  const juiceBoxProjectId = "1";
+  const juiceBoxPayerAddress = "0x3247df1bdC849f69Ba7dA4faf71d1e5850A6Fbb8";
+
   await deploy("JBNFT", {
     // Learn more about args here: https://www.npmjs.com/package/hardhat-deploy#deploymentsdeploy
     from: deployer,
-    // args: [ "Hello", ethers.utils.parseEther("1.5") ],
+    args: [juiceBoxProjectId, juiceBoxPayerAddress],
     log: true,
     waitConfirmations: 5,
   });
@@ -28,10 +33,10 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   // Getting a previously deployed contract
   const YourContract = await ethers.getContract("JBNFT", deployer);
   /*  await YourContract.setPurpose("Hello");
-  
-    // To take ownership of yourContract using the ownable library uncomment next line and add the 
-    // address you want to be the owner. 
-    
+
+    // To take ownership of yourContract using the ownable library uncomment next line and add the
+    // address you want to be the owner.
+
     await YourContract.transferOwnership(
       "ADDRESS_HERE"
     );
