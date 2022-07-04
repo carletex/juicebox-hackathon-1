@@ -43,6 +43,7 @@ function Home({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, block
       }
     };
     updateNfts();
+    // eslint-disable-next-line
   }, [DEBUG, readContracts.JBNFT, (totalSupply || "0").toString()]);
 
   useEffect(() => {
