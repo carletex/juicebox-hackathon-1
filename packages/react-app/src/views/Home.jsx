@@ -9,7 +9,7 @@ function Home({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, block
   if (DEBUG) console.log("🤗 totalSupply:", totalSupply);
 
   const [nfts, setNfts] = useState();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [price, setPrice] = useState(1);
   const perPage = 9;
