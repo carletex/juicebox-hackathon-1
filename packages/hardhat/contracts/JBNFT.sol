@@ -17,7 +17,7 @@ contract JBNFT is
 {
     struct Level {
        uint256 price;
-       string hashImage;
+       string metadataHash;
     }
 
     using Counters for Counters.Counter;
@@ -38,14 +38,11 @@ contract JBNFT is
         return "https://ipfs.io/ipfs/";
     }
 
-    function addLevel(uint256 price, string memory hashImage) public onlyOwner returns(uint256) {
-        levelIdCounter.increment();
+    function addLevel(uint256 _price, string memory _metadataHash) public onlyOwner returns(uint256) {
         uint256 levelId = levelIdCounter.current();
+        levels[levelId] = Level(_price, _metadataHash);
 
-        console.log("LEVEL:", levelId);
-
-        levels[levelId] = Level(price, hashImage);
-
+        levelIdCounter.increment();
         return levelId;
     }
 
@@ -56,7 +53,7 @@ contract JBNFT is
         _tokenIdCounter.increment();
         uint256 tokenId = _tokenIdCounter.current();
         _safeMint(msg.sender, tokenId);
-        _setTokenURI(tokenId, levels[level].hashImage);
+        _setTokenURI(tokenId, levels[level].metadataHash);
 
         // ToDo. set preferClaimedTokens param to TRUE?
         juiceBoxPayer.pay{value: msg.value}(juiceBoxProjectId, JBTokens.ETH, 0, 0, msg.sender, 0, false, "", "");
