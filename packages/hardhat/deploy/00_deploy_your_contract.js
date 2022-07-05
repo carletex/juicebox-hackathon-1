@@ -37,5 +37,12 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     log: true,
     waitConfirmations: 5,
   });
+
+  const jbnft = await ethers.getContract("JBNFT", deployer);
+
+  const result = await jbnft.addLevel(
+    ethers.utils.parseEther("0.01"),
+    "QmfVMAmNM1kDEBYrC2TPzQDoCRFH6F5tE1e9Mr4FkkR5Xr"
+  );
 };
 module.exports.tags = ["JBNFT"];

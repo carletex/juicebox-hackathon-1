@@ -15,10 +15,16 @@ contract JBNFT is
     ERC721URIStorage,
     Ownable
 {
+    struct Level {
+       uint256 price;
+       string hashImage;
+    }
+
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIdCounter;
 
-    uint256 public price = 0.01 ether;
+    Counters.Counter public levelIdCounter;
+    mapping (uint256 => Level) public levels;
 
     uint256 public juiceBoxProjectId;
     IJBProjectPayer public juiceBoxPayer;
@@ -32,13 +38,25 @@ contract JBNFT is
         return "https://ipfs.io/ipfs/";
     }
 
-    function mintItem() public payable returns (uint256) {
-        require(msg.value >= price, "NOT ENOUGH");
+    function addLevel(uint256 price, string memory hashImage) public onlyOwner returns(uint256) {
+        levelIdCounter.increment();
+        uint256 levelId = levelIdCounter.current();
+
+        console.log("LEVEL:", levelId);
+
+        levels[levelId] = Level(price, hashImage);
+
+        return levelId;
+    }
+
+    function mintItem(uint256 level) public payable returns (uint256) {
+        require(level <= levelIdCounter.current(), "WRONG LEVEL");
+        require(msg.value >= levels[level].price, "NOT ENOUGH");
 
         _tokenIdCounter.increment();
         uint256 tokenId = _tokenIdCounter.current();
         _safeMint(msg.sender, tokenId);
-        _setTokenURI(tokenId, "QmfVMAmNM1kDEBYrC2TPzQDoCRFH6F5tE1e9Mr4FkkR5Xr");
+        _setTokenURI(tokenId, levels[level].hashImage);
 
         // ToDo. set preferClaimedTokens param to TRUE?
         juiceBoxPayer.pay{value: msg.value}(juiceBoxProjectId, JBTokens.ETH, 0, 0, msg.sender, 0, false, "", "");

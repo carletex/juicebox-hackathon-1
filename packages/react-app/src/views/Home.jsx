@@ -4,6 +4,8 @@ import { Button, List, Card } from "antd";
 import { Address } from "../components";
 import { ipfs } from "../helpers";
 
+const { ethers } = require("ethers");
+
 function Home({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, blockExplorer }) {
   const totalSupply = useContractReader(readContracts, "JBNFT", "totalSupply");
   if (DEBUG) console.log("🤗 totalSupply:", totalSupply);
@@ -11,7 +13,6 @@ function Home({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, block
   const [nfts, setNfts] = useState();
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
-  const [price, setPrice] = useState(1);
   const perPage = 9;
 
   useEffect(() => {
@@ -46,17 +47,6 @@ function Home({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, block
     // eslint-disable-next-line
   }, [DEBUG, readContracts.JBNFT, (totalSupply || "0").toString()]);
 
-  useEffect(() => {
-    const updatePrice = async () => {
-      if (readContracts.JBNFT) {
-        const priceFromContract = await readContracts.JBNFT.price();
-        console.log("priceFromContract: ", priceFromContract);
-        setPrice(priceFromContract);
-      }
-    };
-    updatePrice();
-  }, [DEBUG, readContracts.JBNFT]);
-
   return (
     <div>
       <div style={{ margin: "auto", padding: 32, paddingBottom: 0 }}>
@@ -77,7 +67,7 @@ function Home({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, block
             type="primary"
             onClick={async () => {
               try {
-                const txCur = await tx(writeContracts.JBNFT.mintItem({ value: price }));
+                const txCur = await tx(writeContracts.JBNFT.mintItem(1, { value: ethers.utils.parseEther("0.01") }));
                 await txCur.wait();
               } catch (e) {
                 console.log("mint failed", e);
