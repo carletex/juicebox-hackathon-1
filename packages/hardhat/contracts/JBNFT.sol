@@ -29,7 +29,7 @@ contract JBNFT is
     uint256 public juiceBoxProjectId;
     IJBProjectPayer public juiceBoxPayer;
 
-    constructor(uint256 _juiceBoxProjectId, address payable _juiceBoxPayerAddress) ERC721("JBNFT", "JBNFT") {
+    constructor(string memory name, string memory symbol, uint256 _juiceBoxProjectId, address payable _juiceBoxPayerAddress) ERC721(name, symbol) {
         juiceBoxProjectId = _juiceBoxProjectId;
         juiceBoxPayer = IJBProjectPayer(_juiceBoxPayerAddress);
     }
