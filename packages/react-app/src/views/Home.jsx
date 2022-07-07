@@ -3,12 +3,16 @@ import React, { useEffect, useState } from "react";
 import { Button, List, Card } from "antd";
 import { Address } from "../components";
 import { ipfs } from "../helpers";
+import { useJuiceBoxBalance } from "../hooks";
 
 const { ethers } = require("ethers");
 
-function Home({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, blockExplorer }) {
+function Home({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, blockExplorer, config }) {
   const totalSupply = useContractReader(readContracts, "JBNFT", "totalSupply");
   if (DEBUG) console.log("🤗 totalSupply:", totalSupply);
+
+  const { data: balance } = useJuiceBoxBalance({ provider: mainnetProvider, projectId: config.juiceBoxProjectId });
+  const balanceETH = balance ? parseFloat(ethers.utils.formatEther(balance)).toFixed(4) : "...";
 
   const [nfts, setNfts] = useState();
   const [loading, setLoading] = useState(false);
@@ -80,6 +84,7 @@ function Home({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, block
         <div style={{ marginTop: 50 }}>
           <div style={{ fontSize: 24 }}>
             <p>Mint an NFT and support our project on JuiceBox.</p>
+            <p>In Treasury: Ξ{balanceETH}</p>
           </div>
 
           <div>

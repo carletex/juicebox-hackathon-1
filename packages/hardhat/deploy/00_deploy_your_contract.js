@@ -1,7 +1,7 @@
 // deploy/00_deploy_your_contract.js
 const { ethers } = require("hardhat");
 // JuiceBox config
-const config = require("../../../config.json");
+const config = require("../../react-app/src/config.json");
 
 const localChainId = "31337";
 

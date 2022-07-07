@@ -14503,6 +14503,11 @@ jsqr@^1.2.0:
     array-includes "^3.1.2"
     object.assign "^4.1.2"
 
+juice-sdk@^2.0.2-alpha:
+  version "2.0.2-alpha"
+  resolved "https://registry.yarnpkg.com/juice-sdk/-/juice-sdk-2.0.2-alpha.tgz#3c5b7f7452b5c3b581224716e41a9183f908eb87"
+  integrity sha512-E/6afgjSOkhlvE2KJghkrPSC+CpTbCGQ5ao28CRD/8r4m8YQXW//dfgjzsIyjvG5OnEoidlM2DEEi/fphZTgjQ==
+
 just-debounce@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/just-debounce/-/just-debounce-1.1.0.tgz#2f81a3ad4121a76bc7cb45dbf704c0d76a8e5ddf"
