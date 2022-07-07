@@ -61,6 +61,8 @@ const NETWORKCHECK = true;
 const USE_BURNER_WALLET = true; // toggle burner wallet feature
 const USE_NETWORK_SELECTOR = false;
 
+const config = require("./config.json");
+
 const web3Modal = Web3ModalSetup();
 
 // 🛰 providers
@@ -318,6 +320,7 @@ function App(props) {
             tx={tx}
             mainnetProvider={mainnetProvider}
             blockExplorer={blockExplorer}
+            config={config}
           />
         </Route>
         <Route exact path="/debug">
