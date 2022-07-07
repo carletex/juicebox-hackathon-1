@@ -28,7 +28,12 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
 
   await deploy("JBNFT", {
     from: deployer,
-    args: [config.juiceBoxProjectId, juiceBoxPayerAddress],
+    args: [
+      config.nftName,
+      config.nftSymbol,
+      config.juiceBoxProjectId,
+      juiceBoxPayerAddress,
+    ],
     log: true,
     waitConfirmations: 5,
   });
