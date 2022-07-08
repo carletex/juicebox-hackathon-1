@@ -1,6 +1,6 @@
 import { useContractReader } from "eth-hooks";
 import React, { useEffect, useState } from "react";
-import { Button, List, Card } from "antd";
+import { Button, List, Card, message } from "antd";
 import { ipfs } from "../helpers";
 import { useJuiceBoxBalance } from "../hooks";
 
@@ -76,9 +76,9 @@ function Home({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, block
                               width: 380,
                               fontSize: 20,
                               height: 50,
-                              backgroundColor: "#60f479",
-                              borderColor: "#60f479",
+                              backgroundColor: "#f5a312",
                               color: "black",
+                              border: "none",
                               fontWeight: "bold",
                             }}
                             type="primary"
@@ -91,6 +91,7 @@ function Home({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, block
                                   }),
                                 );
                                 await txCur.wait();
+                                message.success("Successfully minted. Thanks!");
                               } catch (e) {
                                 console.log("mint failed", e);
                               }

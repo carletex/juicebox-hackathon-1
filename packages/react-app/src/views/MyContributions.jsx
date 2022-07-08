@@ -76,7 +76,7 @@ function MyContributions({ DEBUG, readContracts, writeContracts, tx, mainnetProv
               return (
                 <List.Item key={id + "_" + item.uri + "_" + item.owner}>
                   <Card
-                    style={{ backgroundColor: "#b3e2f4", border: "1px solid #0071bb", borderRadius: 10 }}
+                    style={{ backgroundColor: "#FFECBB", border: "1px solid #0071bb", borderRadius: 10 }}
                     title={
                       <div>
                         <span style={{ fontSize: 18, marginRight: 8, fontWeight: "bold" }}>{item.id}</span>
@@ -84,7 +84,7 @@ function MyContributions({ DEBUG, readContracts, writeContracts, tx, mainnetProv
                     }
                   >
                     <img src={item.image} alt={"NFT #" + id} width="380" height="300" />
-                    <div>
+                    <div style={{ marginTop: "10px" }}>
                       <Address
                         address={item.owner}
                         ensProvider={mainnetProvider}
