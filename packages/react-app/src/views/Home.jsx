@@ -101,7 +101,6 @@ function Home({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, block
               loading={loadingLevels}
               dataSource={levels}
               renderItem={level => {
-
                 return (
                   <List.Item key={level.id}>
                     <Card
