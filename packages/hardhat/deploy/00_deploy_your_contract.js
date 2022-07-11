@@ -41,16 +41,15 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
   const jbnft = await ethers.getContract("JBNFT", deployer);
 
   let tx;
-  await Promise.all(
-    config.nfts.levels.map(async (level) => {
-      // ToDo. We could have the constructor getting the initial levels.
-      tx = await jbnft.addLevel(
-        ethers.utils.parseEther(level.price),
-        level.metadataHash
-      );
+  let level;
+  for (let i = 0; i < config.nfts.levels.length; i++) {
+    level = config.nfts.levels[i];
+    tx = await jbnft.addLevel(
+      ethers.utils.parseEther(level.price),
+      level.metadataHash
+    );
 
-      await tx.wait();
-    })
-  );
+    await tx.wait();
+  }
 };
 module.exports.tags = ["JBNFT"];
