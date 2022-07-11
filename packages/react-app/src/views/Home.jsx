@@ -6,7 +6,7 @@ import { useJuiceBoxBalance } from "../hooks";
 
 const { ethers } = require("ethers");
 
-function Home({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, blockExplorer, config }) {
+function Home({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, targetNetwork, config }) {
   const totalSupply = useContractReader(readContracts, "JBNFT", "totalSupply");
   if (DEBUG) console.log("🤗 totalSupply:", totalSupply);
 
@@ -43,20 +43,20 @@ function Home({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, block
 
   return (
     <div>
-      <div style={{ margin: "auto", padding: 32, paddingBottom: 0 }}>
+      <div style={{ margin: "auto", padding: 32, paddingBottom: 0, maxWidth: 980 }}>
         <div style={{ marginTop: 50 }}>
           <div style={{ fontSize: 24 }}>
             <p>Mint an NFT and support our project on JuiceBox.</p>
-            <p>In Treasury: Ξ{balanceETH}</p>
+            {targetNetwork.chainId === 1 && <p>In Treasury: Ξ{balanceETH}</p>}
           </div>
 
           <div>
             <List
               grid={{
                 xs: 1,
-                sm: 2,
+                sm: 1,
                 md: 2,
-                lg: 3,
+                lg: 2,
                 xl: 3,
                 xxl: 3,
               }}
@@ -73,7 +73,8 @@ function Home({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, block
                         <div>
                           <Button
                             style={{
-                              width: 380,
+                              width: "100%",
+                              maxWidth: 380,
                               fontSize: 20,
                               height: 50,
                               backgroundColor: "#f5a312",
@@ -102,7 +103,13 @@ function Home({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, block
                         </div>
                       }
                     >
-                      <img src={level.image} alt={"Level #" + level.id} width="380" height="300" />
+                      <img
+                        style={{ maxWidth: "100%", height: "auto" }}
+                        src={level.image}
+                        alt={"Level #" + level.id}
+                        width="380"
+                        height="300"
+                      />
                     </Card>
                   </List.Item>
                 );

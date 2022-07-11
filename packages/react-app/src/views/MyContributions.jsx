@@ -4,7 +4,7 @@ import { List, Card } from "antd";
 import { Address } from "../components";
 import { ipfs } from "../helpers";
 
-function MyContributions({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, blockExplorer, config }) {
+function MyContributions({ DEBUG, readContracts, mainnetProvider, blockExplorer }) {
   const totalSupply = useContractReader(readContracts, "JBNFT", "totalSupply");
   if (DEBUG) console.log("🤗 totalSupply:", totalSupply);
 
@@ -53,9 +53,9 @@ function MyContributions({ DEBUG, readContracts, writeContracts, tx, mainnetProv
             grid={{
               gutter: 16,
               xs: 1,
-              sm: 2,
+              sm: 1,
               md: 2,
-              lg: 3,
+              lg: 2,
               xl: 3,
               xxl: 3,
             }}
@@ -83,7 +83,13 @@ function MyContributions({ DEBUG, readContracts, writeContracts, tx, mainnetProv
                       </div>
                     }
                   >
-                    <img src={item.image} alt={"NFT #" + id} width="380" height="300" />
+                    <img
+                      style={{ maxWidth: "100%", height: "auto" }}
+                      src={item.image}
+                      alt={"NFT #" + id}
+                      width="380"
+                      height="300"
+                    />
                     <div style={{ marginTop: "10px" }}>
                       <Address
                         address={item.owner}

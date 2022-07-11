@@ -235,8 +235,8 @@ function App(props) {
         <Menu.Item key="/">
           <Link to="/">Home</Link>
         </Menu.Item>
-        <Menu.Item key="/my-contributions">
-          <Link to="/my-contributions">My Contributions</Link>
+        <Menu.Item key="/contributions">
+          <Link to="/contributions">Contributions</Link>
         </Menu.Item>
         <Menu.Item key="/debug">
           <Link to="/debug">Debug Contracts</Link>
@@ -255,9 +255,10 @@ function App(props) {
             mainnetProvider={mainnetProvider}
             blockExplorer={blockExplorer}
             config={config}
+            targetNetwork={targetNetwork}
           />
         </Route>
-        <Route exact path="/my-contributions">
+        <Route exact path="/contributions">
           {/* pass in any web3 props to this Home component. For example, yourLocalBalance */}
           <MyContributions
             DEBUG={DEBUG}
