@@ -23,7 +23,7 @@ module.exports = async ({ getNamedAccounts, deployments, getChainId }) => {
     const dummyPayer = await ethers.getContract("DummyPayer", deployer);
     juiceBoxPayerAddress = dummyPayer.address;
   } else {
-    juiceBoxPayerAddress = config.juiceboxPayersAddresses.chainId;
+    juiceBoxPayerAddress = config.juiceboxPayersAddresses[chainId];
   }
 
   await deploy("JBNFT", {
