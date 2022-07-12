@@ -1,6 +1,9 @@
+body {
+  background-color: #FCFBF8 !important;
+}
+
 .App {
   text-align: center;
-  padding-left: calc(100vw - 100%);
 }
 
 

@@ -231,15 +231,21 @@ function App(props) {
         logoutOfWeb3Modal={logoutOfWeb3Modal}
         USE_NETWORK_SELECTOR={USE_NETWORK_SELECTOR}
       />
-      <Menu style={{ textAlign: "center", marginTop: 20 }} selectedKeys={[location.pathname]} mode="horizontal">
+      <Menu
+        style={{ textAlign: "center", marginTop: 20, fontSize: 18 }}
+        selectedKeys={[location.pathname]}
+        mode="horizontal"
+        theme="dark"
+      >
         <Menu.Item key="/">
-          <Link to="/">Home</Link>
+          <Link to="/" style={{ color: "white" }}>
+            Home
+          </Link>
         </Menu.Item>
         <Menu.Item key="/contributions">
-          <Link to="/contributions">Contributions</Link>
-        </Menu.Item>
-        <Menu.Item key="/debug">
-          <Link to="/debug">Debug Contracts</Link>
+          <Link to="/contributions" style={{ color: "white" }}>
+            Contributions
+          </Link>
         </Menu.Item>
       </Menu>
 
@@ -302,27 +308,13 @@ function App(props) {
 
       {/* 🗺 Extra UI like gas price, eth price, faucet, and support: */}
       <div style={{ position: "fixed", textAlign: "left", left: 0, bottom: 20, padding: 10 }}>
-        <Row align="middle" gutter={[4, 4]}>
-          <Col span={8}>
+        <Row align="middle" gutter={[4, 4]} style={{ marginBottom: "10px" }}>
+          <Col>
             <Ramp price={price} address={address} networks={NETWORKS} />
           </Col>
 
-          <Col span={8} style={{ textAlign: "center", opacity: 0.8 }}>
+          <Col style={{ textAlign: "center", opacity: 0.8 }}>
             <GasGauge gasPrice={gasPrice} />
-          </Col>
-          <Col span={8} style={{ textAlign: "center", opacity: 1 }}>
-            <Button
-              onClick={() => {
-                window.open("https://t.me/joinchat/KByvmRe5wkR-8F_zz6AjpA");
-              }}
-              size="large"
-              shape="round"
-            >
-              <span style={{ marginRight: 8 }} role="img" aria-label="support">
-                💬
-              </span>
-              Support
-            </Button>
           </Col>
         </Row>
 

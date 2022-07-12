@@ -14,7 +14,7 @@ function Home({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, targe
   const balanceETH = balance ? parseFloat(ethers.utils.formatEther(balance)).toFixed(4) : "...";
 
   const [levels, setLevels] = useState([]);
-  const [loadingLevels, setLoadingLevels] = useState(false);
+  const [loadingLevels, setLoadingLevels] = useState(true);
 
   useEffect(() => {
     const updateLevels = async () => {
@@ -46,13 +46,17 @@ function Home({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, targe
       <div style={{ margin: "auto", padding: 32, paddingBottom: 0, maxWidth: 980 }}>
         <div style={{ marginTop: 50 }}>
           <div style={{ fontSize: 24 }}>
-            <p>Mint an NFT and support our project on JuiceBox.</p>
+            <h2>
+              <strong>BuidlGuidl NFTs</strong>
+            </h2>
+            <p>Mint an NFT and support the BuidlGuidl on JuiceBox.</p>
             {targetNetwork.chainId === 1 && <p>In Treasury: Ξ{balanceETH}</p>}
           </div>
 
           <div>
             <List
               grid={{
+                gutter: 16,
                 xs: 1,
                 sm: 1,
                 md: 2,
@@ -77,8 +81,8 @@ function Home({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, targe
                               maxWidth: 380,
                               fontSize: 20,
                               height: 50,
-                              backgroundColor: "#f5a312",
-                              color: "black",
+                              backgroundColor: "#3182ce",
+                              color: "white",
                               border: "none",
                               fontWeight: "bold",
                             }}
