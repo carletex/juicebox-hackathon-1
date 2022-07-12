@@ -1,4 +1,4 @@
-import { Button, Col, Menu, Row } from "antd";
+import { Col, Menu, Row } from "antd";
 import "antd/dist/antd.css";
 import { useBalance, useContractLoader, useGasPrice, useUserProviderAndSigner } from "eth-hooks";
 import { useExchangeEthPrice } from "eth-hooks/dapps/dex";
