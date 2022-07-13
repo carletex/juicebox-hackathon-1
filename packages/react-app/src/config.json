@@ -1,7 +1,7 @@
 {
   "juiceBoxProjectId": "44",
   "juiceboxPayersAddresses": {
-    "1": "0x7Ae63FBa045Fec7CaE1a75cF7Aa14183483b8397",
+    "1": "0xD8b5AaaDDB2BbfC606E92AafAC2c7F4e64e7d609",
     "4": "0x7c89c6a1686109D7514aD009BAD27140EC94fc80"
   },
   "nftName": "BuidlGuidl JuiceBox Contributor",
@@ -10,21 +10,21 @@
     "levels": [
       {
         "price": "0.01",
-        "metadataHash": "QmRDmnx6Nso82TcVR6ERu3xDx3dEg4KDNk29uEUeEFqiWW",
+        "metadataHash": "QmQPF8LAyHPAyWsrpAQJBPtwzKfm7BmLuHg6o9xcPEX539",
         "cachedImage": "/img/knight.jpeg",
         "title": "Knight",
         "description": "The Damage Dealer"
       },
       {
         "price": "0.05",
-        "metadataHash": "QmY27sauRiBmVVgsxYX4WgvcReoBg8dDggyyAV2Uxmu9go",
+        "metadataHash": "QmPGN4ZmMPjyLu9R8vX1HiojRuZEyA855i2to153n6Txxb",
         "cachedImage": "/img/warlock.jpeg",
         "title": "Warlock",
         "description": "The Magician"
       },
       {
         "price": "0.1",
-        "metadataHash": "QmXeoYhUTnBbmuXRndGpRHWAMAsENrttGiPEgC2EXUzwg3",
+        "metadataHash": "QmPJpzGsLHDn7UKDVJqUgFquXbYBPQTUHr43x5CJyNgWGh",
         "cachedImage": "/img/monk.jpeg",
         "title": "Monk",
         "description": "The Overseer"
