@@ -4,7 +4,7 @@ import { List, Card } from "antd";
 import { Address } from "../components";
 import { ipfs } from "../helpers";
 
-function MyContributions({ DEBUG, readContracts, mainnetProvider, blockExplorer }) {
+function MyContributions({ DEBUG, readContracts, mainnetProvider, blockExplorer, config }) {
   const totalSupply = useContractReader(readContracts, "JBNFT", "totalSupply");
   if (DEBUG) console.log("🤗 totalSupply:", totalSupply);
 
@@ -30,9 +30,13 @@ function MyContributions({ DEBUG, readContracts, mainnetProvider, blockExplorer 
 
           const jsonManifestBuffer = await ipfs.getFromIPFS(ipfsHash);
 
+          const levels = config.nfts.levels;
+          const level = levels.find(level => tokenURI.includes(level.metadataHash));
+          const cachedImage = level.cachedImage;
+
           try {
             const jsonManifest = JSON.parse(jsonManifestBuffer.toString());
-            collectibleUpdate.push({ id: tokenId, owner: owner, uri: tokenURI, ...jsonManifest });
+            collectibleUpdate.push({ id: tokenId, cachedImage, owner, uri: tokenURI, ...jsonManifest });
           } catch (e) {
             console.log(e);
           }
@@ -85,7 +89,7 @@ function MyContributions({ DEBUG, readContracts, mainnetProvider, blockExplorer 
                   >
                     <img
                       style={{ maxWidth: "100%", height: "auto" }}
-                      src={item.image}
+                      src={item.cachedImage}
                       alt={"NFT #" + id}
                       width="380"
                       height="300"
