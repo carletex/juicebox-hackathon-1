@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getJBDirectory, getJBSingleTokenPaymentTerminalStore } from "juice-sdk";
 
-export default function useJuiceBoxBalance({ provider, projectId }) {
+export default function useJuiceBoxBalance({ provider, projectId, updates }) {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
   const [error, setError] = useState();
@@ -26,7 +26,7 @@ export default function useJuiceBoxBalance({ provider, projectId }) {
       .catch(e => {
         setError(e);
       });
-  }, [provider, projectId]);
+  }, [provider, projectId, updates]);
 
   return { loading, data, error };
 }

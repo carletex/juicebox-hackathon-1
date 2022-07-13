@@ -10,7 +10,13 @@ function Home({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, targe
   const totalSupply = useContractReader(readContracts, "JBNFT", "totalSupply");
   if (DEBUG) console.log("🤗 totalSupply:", totalSupply);
 
-  const { data: balance } = useJuiceBoxBalance({ provider: mainnetProvider, projectId: config.juiceBoxProjectId });
+  const [juiceBoxBalanceUpdates, setJuiceBoxBalanceUpdates] = useState(0);
+
+  const { data: balance } = useJuiceBoxBalance({
+    provider: mainnetProvider,
+    projectId: config.juiceBoxProjectId,
+    updates: juiceBoxBalanceUpdates,
+  });
   const balanceETH = balance ? parseFloat(ethers.utils.formatEther(balance)).toFixed(4) : "...";
 
   const [levels, setLevels] = useState([]);
@@ -115,6 +121,7 @@ function Home({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, targe
                             );
                             await txCur.wait();
                             message.success("Successfully minted. Thanks!");
+                            setJuiceBoxBalanceUpdates(juiceBoxBalanceUpdates + 1);
                           } catch (e) {
                             console.log("mint failed", e);
                           }
