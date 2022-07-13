@@ -10,15 +10,24 @@
     "levels": [
       {
         "price": "0.01",
-        "metadataHash": "QmRDmnx6Nso82TcVR6ERu3xDx3dEg4KDNk29uEUeEFqiWW"
+        "metadataHash": "QmRDmnx6Nso82TcVR6ERu3xDx3dEg4KDNk29uEUeEFqiWW",
+        "cachedImage": "/img/knight.jpeg",
+        "title": "Knight",
+        "description": "The Damage Dealer"
       },
       {
         "price": "0.05",
-        "metadataHash": "QmY27sauRiBmVVgsxYX4WgvcReoBg8dDggyyAV2Uxmu9go"
+        "metadataHash": "QmY27sauRiBmVVgsxYX4WgvcReoBg8dDggyyAV2Uxmu9go",
+        "cachedImage": "/img/warlock.jpeg",
+        "title": "Warlock",
+        "description": "The Magician"
       },
       {
         "price": "0.1",
-        "metadataHash": "QmXeoYhUTnBbmuXRndGpRHWAMAsENrttGiPEgC2EXUzwg3"
+        "metadataHash": "QmXeoYhUTnBbmuXRndGpRHWAMAsENrttGiPEgC2EXUzwg3",
+        "cachedImage": "/img/monk.jpeg",
+        "title": "Monk",
+        "description": "The Overseer"
       }
     ]
   }

@@ -27,9 +27,19 @@ function Home({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, targe
           const levelUpdate = [];
           for (let levelId = 0; levelId < levelIdCounter; levelId++) {
             const levelData = await readContracts.JBNFT.levels(levelId);
-            const jsonManifestBuffer = await ipfs.getFromIPFS(levelData[1]);
-            const jsonManifest = JSON.parse(jsonManifestBuffer.toString());
-            levelUpdate.push({ id: levelId, price: levelData[0], image: jsonManifest.image });
+
+            let image;
+            const title = config?.nfts?.levels[levelId].title;
+            const description = config?.nfts?.levels[levelId].description;
+
+            if (config.nfts.levels[levelId].cachedImage) {
+              image = config.nfts.levels[levelId].cachedImage;
+            } else {
+              const jsonManifestBuffer = await ipfs.getFromIPFS(levelData[1]);
+              const jsonManifest = JSON.parse(jsonManifestBuffer.toString());
+              image = jsonManifest.image;
+            }
+            levelUpdate.push({ id: levelId, price: levelData[0], image, title, description });
           }
           if (DEBUG) console.log("Levels: ", levelUpdate);
           setLevels(levelUpdate);
@@ -70,43 +80,7 @@ function Home({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, targe
               renderItem={level => {
                 return (
                   <List.Item key={level.id}>
-                    <Card
-                      style={{ border: "none" }}
-                      headStyle={{ borderBottom: "none" }}
-                      title={
-                        <div>
-                          <Button
-                            style={{
-                              width: "100%",
-                              maxWidth: 380,
-                              fontSize: 20,
-                              height: 50,
-                              backgroundColor: "#3182ce",
-                              color: "white",
-                              border: "none",
-                              fontWeight: "bold",
-                            }}
-                            type="primary"
-                            onClick={async () => {
-                              try {
-                                console.log("price: ", level.price);
-                                const txCur = await tx(
-                                  writeContracts.JBNFT.mintItem(level.id, {
-                                    value: level.price,
-                                  }),
-                                );
-                                await txCur.wait();
-                                message.success("Successfully minted. Thanks!");
-                              } catch (e) {
-                                console.log("mint failed", e);
-                              }
-                            }}
-                          >
-                            MINT for Ξ{ethers.utils.formatEther(level.price)}
-                          </Button>
-                        </div>
-                      }
-                    >
+                    <Card style={{ border: "none" }} headStyle={{ borderBottom: "none" }}>
                       <img
                         style={{ maxWidth: "100%", height: "auto" }}
                         src={level.image}
@@ -114,6 +88,40 @@ function Home({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, targe
                         width="380"
                         height="300"
                       />
+                      <h2 style={{ marginTop: "10px", marginBottom: 0, fontSize: 24 }}>
+                        <strong>{level.title}</strong>
+                      </h2>
+                      <p style={{ color: "#8c8c8c", fontSize: 16 }}>{level.description}</p>
+                      <Button
+                        style={{
+                          width: "100%",
+                          maxWidth: 380,
+                          fontSize: 20,
+                          height: 50,
+                          backgroundColor: "#3182ce",
+                          color: "white",
+                          border: "none",
+                          fontWeight: "bold",
+                          marginTop: "5px",
+                        }}
+                        type="primary"
+                        onClick={async () => {
+                          try {
+                            console.log("price: ", level.price);
+                            const txCur = await tx(
+                              writeContracts.JBNFT.mintItem(level.id, {
+                                value: level.price,
+                              }),
+                            );
+                            await txCur.wait();
+                            message.success("Successfully minted. Thanks!");
+                          } catch (e) {
+                            console.log("mint failed", e);
+                          }
+                        }}
+                      >
+                        MINT for Ξ{ethers.utils.formatEther(level.price)}
+                      </Button>
                     </Card>
                   </List.Item>
                 );
