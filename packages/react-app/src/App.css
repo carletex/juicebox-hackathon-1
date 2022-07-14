@@ -2,6 +2,10 @@ body {
   background-color: #FCFBF8 !important;
 }
 
+body[data-theme="dark"] {
+  background-color: #393939 !important;
+}
+
 .App {
   text-align: center;
 }

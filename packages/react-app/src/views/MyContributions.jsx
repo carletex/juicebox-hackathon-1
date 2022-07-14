@@ -80,7 +80,7 @@ function MyContributions({ DEBUG, readContracts, mainnetProvider, blockExplorer,
               return (
                 <List.Item key={id + "_" + item.uri + "_" + item.owner}>
                   <Card
-                    style={{ backgroundColor: "#FFECBB", border: "1px solid #0071bb", borderRadius: 10 }}
+                    style={{ border: "1px solid #0071bb", borderRadius: 10 }}
                     title={
                       <div>
                         <span style={{ fontSize: 18, marginRight: 8, fontWeight: "bold" }}>{item.id}</span>
