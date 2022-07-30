@@ -4,6 +4,8 @@ Give some NFT love to your [Juicebox's](https://juicebox.money/#/) donors.
 
 ![Main screen](.github/img/main.png?raw=true)
 
+Live demo at https://nft-to-jb.surge.sh/
+
 ## 🎥 JuiceBox Hackathon Presentation Video
 
 [![JuiceBox Hackathon presentation video](https://user-images.githubusercontent.com/466652/181997216-2b459db3-3f36-4ac0-9126-ddce5f5a68b3.jpg)](https://youtu.be/oMCLXHgr--o)
