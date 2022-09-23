@@ -1,22 +1,11 @@
-import { Col, Menu, Row } from "antd";
+import { Menu } from "antd";
 import "antd/dist/antd.css";
 import { useBalance, useContractLoader, useGasPrice, useUserProviderAndSigner } from "eth-hooks";
 import { useExchangeEthPrice } from "eth-hooks/dapps/dex";
 import React, { useCallback, useEffect, useState } from "react";
 import { Link, Route, Switch, useLocation } from "react-router-dom";
 import "./App.css";
-import {
-  Account,
-  Contract,
-  Faucet,
-  GasGauge,
-  Header,
-  Ramp,
-  ThemeSwitch,
-  NetworkDisplay,
-  FaucetHint,
-  NetworkSwitch,
-} from "./components";
+import { Account, Contract, Header, NetworkDisplay, FaucetHint, NetworkSwitch } from "./components";
 import { NETWORKS, ALCHEMY_KEY } from "./constants";
 import externalContracts from "./contracts/external_contracts";
 // contracts
@@ -24,6 +13,7 @@ import deployedContracts from "./contracts/hardhat_contracts.json";
 import { Transactor, Web3ModalSetup } from "./helpers";
 import { Home, MyContributions } from "./views";
 import { useStaticJsonRPC } from "./hooks";
+import { useThemeSwitcher } from "react-css-theme-switcher";
 
 const { ethers } = require("ethers");
 /*
@@ -142,6 +132,10 @@ function App(props) {
 
   // If you want to make 🔐 write transactions to your contracts, use the userSigner:
   const writeContracts = useContractLoader(userSigner, contractConfig, localChainId);
+
+  const { switcher, currentTheme, status, themes } = useThemeSwitcher();
+
+  switcher({ theme: themes.dark });
 
   //
   // 🧫 DEBUG 👨🏻‍🔬
@@ -303,34 +297,6 @@ function App(props) {
           />
         </Route>
       </Switch>
-
-      <ThemeSwitch />
-
-      {/* 🗺 Extra UI like gas price, eth price, faucet, and support: */}
-      <div style={{ position: "fixed", textAlign: "left", left: 0, bottom: 20, padding: 10 }}>
-        <Row align="middle" gutter={[4, 4]} style={{ marginBottom: "10px" }}>
-          <Col>
-            <Ramp price={price} address={address} networks={NETWORKS} />
-          </Col>
-
-          <Col style={{ textAlign: "center", opacity: 0.8 }}>
-            <GasGauge gasPrice={gasPrice} />
-          </Col>
-        </Row>
-
-        <Row align="middle" gutter={[4, 4]}>
-          <Col span={24}>
-            {
-              /*  if the local provider has a signer, let's show the faucet:  */
-              faucetAvailable ? (
-                <Faucet localProvider={localProvider} price={price} ensProvider={mainnetProvider} />
-              ) : (
-                ""
-              )
-            }
-          </Col>
-        </Row>
-      </div>
     </div>
   );
 }

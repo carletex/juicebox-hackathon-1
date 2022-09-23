@@ -28,6 +28,48 @@
         "cachedImage": "/img/monk.jpeg",
         "title": "Monk",
         "description": "The Overseer"
+      },
+      {
+        "price": "0.5",
+        "metadataHash": "QmVGqkpcXunBxXJr6Qr1CwbjWkqvrCKBa26xqyMg5oxtmv",
+        "cachedImage": "/img/bot.png",
+        "title": "Bot",
+        "description": "The Notification Repeater"
+      },
+      {
+        "price": "0.5",
+        "metadataHash": "QmVGqkpcXunBxXJr6Qr1CwbjWkqvrCKBa26xqyMg5oxtmv",
+        "cachedImage": "/img/bot.png",
+        "title": "Bot",
+        "description": "The Notification Repeater"
+      },
+      {
+        "price": "1",
+        "metadataHash": "QmXpk6oVNxYbvCQP8KVKbspvQ8j1i9qPuYQvjEAkrXCWTe",
+        "cachedImage": "/img/cadet.png",
+        "title": "Cadet",
+        "description": "The Apprentice"
+      },
+      {
+        "price": "3",
+        "metadataHash": "QmUzj5KXEbotNdDRZH1bdWVDFY6FMy9tvatS36T48ZnZzT",
+        "cachedImage": "/img/archer.png",
+        "title": "Archer",
+        "description": "The Gatekeeper"
+      },
+      {
+        "price": "5",
+        "metadataHash": "QmYtnFz36DABaTNH6QgBr3jypTsxe2GUPGgHggchqAotm2",
+        "cachedImage": "/img/pikeman.png",
+        "title": "Pikeman",
+        "description": "The Full Warrior"
+      },
+      {
+        "price": "10",
+        "metadataHash": "QmSCxaakAR2SaDi2axiujDYUSXPQ6vsmmjJH5vq7ufxZvj",
+        "cachedImage": "/img/castle.png",
+        "title": "Castle",
+        "description": "The Fortress of BuidlGuidl"
       }
     ]
   }

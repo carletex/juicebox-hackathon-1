@@ -32,20 +32,22 @@ function Home({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, targe
         if (levelIdCounter > 0) {
           const levelUpdate = [];
           for (let levelId = 0; levelId < levelIdCounter; levelId++) {
-            const levelData = await readContracts.JBNFT.levels(levelId);
+            if (levelId != 4) {
+              const levelData = await readContracts.JBNFT.levels(levelId);
 
-            let image;
-            const title = config?.nfts?.levels[levelId].title;
-            const description = config?.nfts?.levels[levelId].description;
+              let image;
+              const title = config?.nfts?.levels[levelId].title;
+              const description = config?.nfts?.levels[levelId].description;
 
-            if (config.nfts.levels[levelId].cachedImage) {
-              image = config.nfts.levels[levelId].cachedImage;
-            } else {
-              const jsonManifestBuffer = await ipfs.getFromIPFS(levelData[1]);
-              const jsonManifest = JSON.parse(jsonManifestBuffer.toString());
-              image = jsonManifest.image;
+              if (config.nfts.levels[levelId].cachedImage) {
+                image = config.nfts.levels[levelId].cachedImage;
+              } else {
+                const jsonManifestBuffer = await ipfs.getFromIPFS(levelData[1]);
+                const jsonManifest = JSON.parse(jsonManifestBuffer.toString());
+                image = jsonManifest.image;
+              }
+              levelUpdate.push({ id: levelId, price: levelData[0], image, title, description });
             }
-            levelUpdate.push({ id: levelId, price: levelData[0], image, title, description });
           }
           if (DEBUG) console.log("Levels: ", levelUpdate);
           setLevels(levelUpdate);
@@ -59,7 +61,7 @@ function Home({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, targe
 
   return (
     <div>
-      <div style={{ margin: "auto", padding: 32, paddingBottom: 0, maxWidth: 980 }}>
+      <div style={{ margin: "auto", padding: 32, paddingBottom: 0, maxWidth: 1280 }}>
         <div style={{ marginTop: 50 }}>
           <div style={{ fontSize: 24 }}>
             <h2>
@@ -77,8 +79,8 @@ function Home({ DEBUG, readContracts, writeContracts, tx, mainnetProvider, targe
                 sm: 1,
                 md: 2,
                 lg: 2,
-                xl: 3,
-                xxl: 3,
+                xl: 4,
+                xxl: 4,
               }}
               pagination={false}
               loading={loadingLevels}

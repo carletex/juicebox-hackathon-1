@@ -30,8 +30,10 @@ function MyContributions({ DEBUG, readContracts, mainnetProvider, blockExplorer,
 
           const jsonManifestBuffer = await ipfs.getFromIPFS(ipfsHash);
 
+          console.log("jsonManifestBuffer: ", jsonManifestBuffer.toString());
+
           const levels = config.nfts.levels;
-          const level = levels.find(level => tokenURI.includes(level.metadataHash));
+          const level = levels.find(level => ipfsHash === level.metadataHash);
           const cachedImage = level.cachedImage;
 
           try {
